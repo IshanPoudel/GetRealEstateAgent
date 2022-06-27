@@ -30,6 +30,8 @@ db = mysql.connector.connect(host="localhost" ,
     passwd="rootroot"  ,
     database = "real_estate")
 
+# ALTER TABLE table1 ADD COLUMN foo INT DEFAULT 0;
+# ALTER TABLE house_agent ADD COLUMN updated_on_final VARCHAR(10) DEFAULT "false";
 def chunks(list_to_split , n_parts):
 
 
