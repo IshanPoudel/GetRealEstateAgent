@@ -33,7 +33,7 @@ def get_list_of_houses(url):
 
 
         driver.get(url)
-        time.sleep(4)
+        time.sleep(20)
 
         driver.implicitly_wait(10)
         html_text = driver.page_source
