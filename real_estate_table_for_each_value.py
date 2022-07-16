@@ -62,6 +62,7 @@ def chunks(list_to_split , n_parts):
 
 
 def update_to_db(link_and_id ):
+    count = 0;
     for link , id in link_and_id:
         time.sleep(randint(5 , 20))
 
@@ -82,10 +83,13 @@ def update_to_db(link_and_id ):
                 db.commit()
 
                 print("Updated house with address"+ to_commit[0]+to_commit[1] + " and agent" + to_commit[2])
+                count = count+1
 
             except Exception:
                 print("Could not update")
                 print(traceback.format_exc())
+    print("Updated " + str(count) + "values")
+
 
 
 
