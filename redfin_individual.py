@@ -18,7 +18,10 @@ import mysql.connector
 
 import traceback
 
-
+# You can download the chrome driver once and then you can specify the path for the chromedriver
+# driver = webdriver.Chrome(PATH)
+#  OR you can have it downloaded everytime
+# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
 
 

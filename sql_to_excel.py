@@ -11,7 +11,7 @@ db = mysql.connector.connect(host="localhost" ,
 mycursor = db.cursor()
 
 #fetch
-query = "select * from final_agent order by agent_id desc limit 50"
+query = "select * from final_agent order by agent_id desc "
 mycursor.execute(query)
 rows = mycursor.fetchall()
 
@@ -28,5 +28,5 @@ df = pd.DataFrame(rows , columns= ('Agent_ID' , 'TexasRealEstateAgentID' , 'Name
 
 
 
-df.to_excel(r'/Users/user/Desktop/output_agent.xlsx' , index=False)
+df.to_excel(r'/Users/user/Desktop/excel/abc.xlsx' , index=False)
 
