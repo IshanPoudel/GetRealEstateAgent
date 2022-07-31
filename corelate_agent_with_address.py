@@ -1,5 +1,5 @@
-
-#gets the
+'''From the agent_list , get the houseID , and
+co-relate with the master trec sql file and insert into final table'''
 import re
 import time
 import logging

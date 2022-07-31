@@ -1,3 +1,7 @@
+'''First Step: Given link to Redfin , Zillow find a way to get the new links from a file and store it
+ into the database table named house_Link'''
+
+
 import re
 import time
 import logging
@@ -18,38 +22,6 @@ from selenium.webdriver.common.keys import Keys
 import mysql.connector
 
 
-# # // get_list_of_houses and use it to look for address.
-#
-#
-# # get the links from the database.
-# list = get_list_of_houses()
-#
-# if len(list) == 0:
-#     print("List is empty")
-#     quit()
-#
-# house_link = list[0]
-# print("Getting real_estate_info_for house " + house_link)
-#
-#
-#
-# agent_list = get_real_estate_info(house_link)
-#
-# if agent_list is None:
-#     print("No values in the list")
-# else:
-#     print(agent_list)
-#
-#
-# house_link=list[1]
-# print("Getting real_estate_info_for_house" + house_link)
-#
-# agent_list = get_real_estate_info(house_link)
-#
-# if agent_list is None:
-#     print("No values in the list")
-# else:
-#     print(agent_list)
 
 
 
@@ -81,6 +53,7 @@ mycursor = db.cursor()
 url = "https://www.redfin.com/city/30794/TX/Dallas/filter/sort=lo-days,viewport=34.25294:31.40081:-94.60209:-98.39237"
 url_list = []
 url_list.append(url)
+
 for i in range(2 , 7):
     url_list.append(url+"/page-"+str(i))
 

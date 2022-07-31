@@ -1,3 +1,10 @@
+'''
+Given the link of an individual house , it grabs the street and state address ,
+real_estate_agent_name and address and the texas real estate liscence number
+'''
+
+
+
 import re
 import time
 import logging

@@ -1,3 +1,7 @@
+''' For each house link in the house_link table ,
+split it into threads and get the house specs for each value and update it.'''
+
+
 import re
 import time
 import logging
@@ -46,13 +50,6 @@ def chunks(list_to_split , n_parts):
 
 
     return (list_to_split[i*chunk_size+min(i,remainder):(i+1)*chunk_size+min(i+1 , remainder)]  for i in range(n_parts))
-
-
-
-
-
-
-
 
 
 
