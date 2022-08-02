@@ -1,4 +1,4 @@
-#from a particular listing get all the house cards without a 3d walkthrough listed on it/
+''' From a particular sql file , get all the house_listings.'''
 
 import re
 import time

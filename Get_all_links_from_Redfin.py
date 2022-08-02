@@ -20,81 +20,72 @@ from webdriver_manager.chrome import *
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import mysql.connector
+import config
+
+
+
+def get_all_links():
 
 
 
 
+    db = mysql.connector.connect(host="localhost",
+                                 user=config.user,
+                                 passwd=config.password,
+                                 db='real_estate'
 
-#create a database.
-#one table for house_id and house_link
-#one table for house_id and address and other info ,
-#one table for real estate agent info
-#one table from trec
-#final table corelating all .
+                                 )
 
-db = mysql.connector.connect(host="localhost" ,
-    user = "root" ,
-    passwd="rootroot"  ,
-    database = "real_estate")
+    mycursor = db.cursor()
 
 
-mycursor = db.cursor()
+    # //store values in the database
 
-# mycursor.execute ("DROP DATABASE IF EXISTS real_estate")
-# mycursor.execute ("CREATE DATABASE REAL_ESTATE")
-# mycursor.execute("CREATE TABLE house_link(  link VARCHAR(1000) , int houseID PRIMARY KEY AUTO_INCREMENT )")
-# mycursor.execute("CREATE TABLE house_link(  link VARCHAR(1000)  , houseID int PRIMARY KEY AUTO_INCREMENT )")
+    url = config.url
+    url_list = []
+    url_list.append(url)
 
+    for i in range(2 , 7):
+        url_list.append(url+"/page-"+str(i))
 
-
-# //store values in the database
-
-#urls for the houses.
-url = "https://www.redfin.com/city/30794/TX/Dallas/filter/sort=lo-days,viewport=34.25294:31.40081:-94.60209:-98.39237"
-url_list = []
-url_list.append(url)
-
-for i in range(2 , 7):
-    url_list.append(url+"/page-"+str(i))
-
-for url in url_list:
-    time.sleep(20)
-    print("Getting values from "+ url)
+    for url in url_list:
+        time.sleep(20)
+        print("Getting values from "+ url)
 
 
-    house_link = get_list_of_houses(url)
+        house_link = get_list_of_houses(url)
 
-    #need to know which errors did not work
-    if house_link is None:
-        print(url + "did not work")
+        #need to know which errors did not work
+        if house_link is None:
+            print(url + "did not work")
 
-    for house in house_link:
-        # check if it is already in the database.
-        # you have an incoming stream of houses , once you reach a house that has already been read previously you stop
-        query = "SELECT link FROM house_link WHERE link = " + " '" + house + "'"
-        mycursor.execute(query)
-        check_if_present = mycursor.fetchall()
+        for house in house_link:
+            # check if it is already in the database.
+            # you have an incoming stream of houses , once you reach a house that has already been read previously you stop
+            query = "SELECT link FROM house_link WHERE link = " + " '" + house + "'"
+            mycursor.execute(query)
+            check_if_present = mycursor.fetchall()
 
-        if not check_if_present:
-            mycursor.execute("INSERT INTO house_link ( link ) VALUES (%s )",
-                             (house,))
-            db.commit()
-            print("Inserted into database")
+            if not check_if_present:
+                mycursor.execute("INSERT INTO house_link ( link ) VALUES (%s )",
+                                 (house,))
+                db.commit()
+                print("Inserted into database")
 
 
 
 
-        if check_if_present:
+            if check_if_present:
 
-            print("Up to Date")
-            print(house + "already in the table")
-            quit()
+                print("Up to Date")
+                print(house + "already in the table")
+                quit()
 
-    mycursor.execute("DESCRIBE house_link")
+        mycursor.execute("DESCRIBE house_link")
 
-    for x in mycursor:
-        print(x)
+        for x in mycursor:
+            print(x)
 
-#at this point all have been read , you only need to read the new ones ,
+    #at this point all have been read , you only need to read the new ones ,
 
 

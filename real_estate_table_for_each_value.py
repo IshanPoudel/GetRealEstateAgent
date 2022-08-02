@@ -29,10 +29,7 @@ from random import randint
 
 
 
-db = mysql.connector.connect(host="localhost" ,
-    user = "root" ,
-    passwd="rootroot"  ,
-    database = "real_estate")
+
 
 # ALTER TABLE table1 ADD COLUMN foo INT DEFAULT 0;
 # ALTER TABLE house_agent ADD COLUMN updated_on_final VARCHAR(10) DEFAULT "false";
@@ -91,49 +88,43 @@ def update_to_db(link_and_id ):
 
 
 
-#create secondary table for each id with the house_id from the primary table
-
-# CREATE TABLE house_agent(house_id int PRIMARY KEY ,
-#                                               FOREIGN KEY(house_id) REFERENCES house_link(houseID) ,
-#                                                                                street_address VARCHAR(100) ,
-#                                                                                               state_address VARCHAR(100) ,
-#                                                                                                             agent_name VARCHAR(100) ,
-#                                                                                                                        AGENCY VARCHAR(100) ,
-#                                                                                                                               trec VARCHAR(10));
-
-#get value from house_link table with data_present true.
 
 
+def get_real_estate_table_for_each_value():
+    db = mysql.connector.connect(host="localhost",
+                                     user="root",
+                                     passwd="rootroot",
+                                     database="real_estate")
 
-mycursor = db.cursor()
+    mycursor = db.cursor()
 
-mycursor.execute("SELECT link , houseID FROM house_link WHERE data_present = 'false'")
-link_and_id = mycursor.fetchall()
+    mycursor.execute("SELECT link , houseID FROM house_link WHERE data_present = 'false'")
+    link_and_id = mycursor.fetchall()
 
 
-split_link_into_n_parts = 5
-list_for_threads = chunks(link_and_id ,split_link_into_n_parts)
+    split_link_into_n_parts = 5
+    list_for_threads = chunks(link_and_id ,split_link_into_n_parts)
 
 
 
-#split the list into equal sizes and feed it to the function below .
-#link_and_id have to be split into equal parts.
+    #split the list into equal sizes and feed it to the function below .
+    #link_and_id have to be split into equal parts.
 
 
-lock = Lock()
+    lock = Lock()
 
-threads = []
+    threads = []
 
-# for house_link_and_id in list_for_threads:
-#     print(house_link_and_id)
-#     print("haha")
+    # for house_link_and_id in list_for_threads:
+    #     print(house_link_and_id)
+    #     print("haha")
 
-for house_link_and_id in list_for_threads:
-    t = threading.Thread(target= update_to_db , args = (house_link_and_id , ))
-    t.start()
-    print("I started a thread")
-    threads.append(t)
+    for house_link_and_id in list_for_threads:
+        t = threading.Thread(target= update_to_db , args = (house_link_and_id , ))
+        t.start()
+        print("I started a thread")
+        threads.append(t)
 
-for thread in threads:
-    thread.join()
+    for thread in threads:
+        thread.join()
 

@@ -76,15 +76,16 @@ def get_real_estate_info(link):
         # print(home)
         # home = home.find("div" , {  "class":"dp-col-sm-12 dp-col-md-8"})
 
-        list_of_server_root_id = ["22" , "27" ]
+        list_of_server_root_id = [ "20" , "22" , "27" ]
 
         i=0
         home_2 = None
-        while home_2 is None:
+        while home_2 is None :
 
              home_1 = home.find("div" , {"data-react-server-root-id":list_of_server_root_id[i] , "class": "dp-col-sm-12 dp-col-md-8"})
              home_2 = home_1.find("section" , {"class":"MainHouseInfoPanel"})
              i=i+1
+
         home_3 = home_2.find("div" , {"class" : "sectionContainer"})
         home_4 = home_3.find("div" , {"class" : "house-info-container"})
         home_5 = home_4.find( "div" , {"class":"agent-basic-details"})

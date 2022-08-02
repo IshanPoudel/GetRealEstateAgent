@@ -23,30 +23,25 @@ import mysql.connector
 from random import randint
 import xlrd
 import pandas as pd
+import config
 
 
 
 
-db = mysql.connector.connect(host="localhost" ,
-    user = "root" ,
-    passwd="rootroot"  ,
-    database = "real_estate")
+db = mysql.connector.connect(host="localhost",
+                             user=config.user,
+                             passwd=config.password,
+                             db='real_estate'
 
+                             )
 
-#create a table
 mycursor = db.cursor()
 
 
-
-
-# q1 = "CREATE TABLE agent_record (agent_id int PRIMARY KEY AUTO_INCREMENT , trec_id VARCHAR(10) , name VARCHAR(200) , phone_number VARCHAR(20) , email VARCHAR(50) , address VARCHAR(200))"
-# mycursor.execute(q1)
-
-# after creating table
-
 # read csv file
-location = "/Users/user/Desktop/master_trec.xlsx"
+
 data = pd.read_excel(r'/Users/user/Desktop/master_trec.xlsx')
+
 data.columns = ['TREC_ID' ,'NAME' ,'PHONE' , 'EMAIL' , 'STREET' , 'CITY' , 'STATE' , 'ZIP' ]
 df = data.iloc[ :  , :]
 
@@ -60,7 +55,7 @@ for  row in df.itertuples():
         trec = "0"+str(row[1])+" "
         address= str(row[5]) + " " + str(row[6]) + " " + str(row[7]) + " " + str(row[8])
         # print(str(row[4]) + " " + str(row[5]) + " " + str(row[6]) + " " + str(row[7]))
-        query = "I"
+        query = "INSERT INTO agent_record(trec_id , name , phone_number , email  , address ) VALUES (%s , %s , %s , %s , %s)  "
         mycursor.execute(query , (trec , str(row[2]) , str(row[3]) , str(row[4]) , address ))
 
         print("Added agent " + str(row[1])+"'s record.")
