@@ -35,7 +35,7 @@ import mysql.connector
 db = mysql.connector.connect(host="localhost" ,
     user = "root" ,
     passwd="rootroot"  ,
-    database = "real_estate")
+    database = "real_estate_information")
 
 
 mycursor = db.cursor()
@@ -63,6 +63,7 @@ for url in url_list:
 
 
     house_link = get_list_of_houses(url)
+    ''' get_list_of_houses is a function in redfin.py whoch given a link , it grabs the links in all the housecards'''
 
     #need to know which errors did not work
     if house_link is None:

@@ -1,10 +1,3 @@
-'''
-Given the link of an individual house , it grabs the street and state address ,
-real_estate_agent_name and address and the texas real estate liscence number
-'''
-
-
-
 import re
 import time
 import logging
@@ -36,7 +29,7 @@ def get_real_estate_info(link):
 
 
     chrome_options = Options()  # Instantiate an options class for the selenium webdriver
-    chrome_options.add_argument("--headless")  # So that a chrome window does not pop up
+    # chrome_options.add_argument("--headless")  # So that a chrome window does not pop up
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     time.sleep(10)
 
@@ -76,7 +69,7 @@ def get_real_estate_info(link):
         # print(home)
         # home = home.find("div" , {  "class":"dp-col-sm-12 dp-col-md-8"})
 
-        list_of_server_root_id = ["22" , "27" ]
+        list_of_server_root_id = [  "21" ,"22" , "27" ]
 
         i=0
         home_2 = None
@@ -122,6 +115,8 @@ def get_real_estate_info(link):
 
 
     except Exception:
+        print(link)
+        print(soup)
         print("Error while getting the details")
         print(traceback.format_exc())
         return blank_list
@@ -156,7 +151,6 @@ def get_real_estate_info(link):
     except:
         print(traceback.format_exc())
         return blank_list
-
 
 
 

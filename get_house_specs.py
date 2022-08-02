@@ -1,3 +1,6 @@
+''' Preliminary file to get some more scores for houses. Disregard'''
+
+
 #from the house_link get house_specs.
 # PRICE
 # BED AND BATH

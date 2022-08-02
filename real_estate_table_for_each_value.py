@@ -32,7 +32,7 @@ from random import randint
 db = mysql.connector.connect(host="localhost" ,
     user = "root" ,
     passwd="rootroot"  ,
-    database = "real_estate")
+    database = "real_estate_information")
 
 # ALTER TABLE table1 ADD COLUMN foo INT DEFAULT 0;
 # ALTER TABLE house_agent ADD COLUMN updated_on_final VARCHAR(10) DEFAULT "false";
@@ -75,7 +75,7 @@ def update_to_db(link_and_id ):
                 db.commit()
 
                 #change value of data_present of house_link table to true
-                Q = "UPDATE house_link SET data_present = 'true' WHERE houseID="+str(id)
+                Q = "UPDATE house_link SET DataScraped = true WHERE houseID="+str(id)
                 mycursor.execute(Q)
                 db.commit()
 
@@ -107,11 +107,11 @@ def update_to_db(link_and_id ):
 
 mycursor = db.cursor()
 
-mycursor.execute("SELECT link , houseID FROM house_link WHERE data_present = 'false'")
+mycursor.execute("SELECT link , houseID FROM house_link WHERE DataScraped = false")
 link_and_id = mycursor.fetchall()
 
 
-split_link_into_n_parts = 5
+split_link_into_n_parts = 1
 list_for_threads = chunks(link_and_id ,split_link_into_n_parts)
 
 

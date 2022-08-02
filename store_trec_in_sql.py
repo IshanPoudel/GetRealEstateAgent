@@ -1,3 +1,6 @@
+#Store the master trec file in excel.
+
+
 import re
 import time
 import logging
@@ -39,8 +42,7 @@ mycursor = db.cursor()
 
 
 
-# q1 = "CREATE TABLE agent_record (agent_id int PRIMARY KEY AUTO_INCREMENT , trec_id VARCHAR(10) , name VARCHAR(200) , phone_number VARCHAR(20) , email VARCHAR(50) , address VARCHAR(200))"
-# mycursor.execute(q1)
+
 
 # after creating table
 

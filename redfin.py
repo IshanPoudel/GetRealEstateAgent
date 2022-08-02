@@ -1,5 +1,7 @@
 #from a particular listing get all the house cards without a 3d walkthrough listed on it/
 
+''' given one single link to one single link , grab the ids to get all the required values.'''
+
 import re
 import time
 import logging
