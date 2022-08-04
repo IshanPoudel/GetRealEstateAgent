@@ -8,3 +8,6 @@ in the new version you need the have the tuple and send it to the find_element a
 CSS_TUPLE = (By.CSS_SELECTOR , "#gh-ac")
 abc = driver.find_element(*CSS_TUPLE).send_keys("Video");
 driver.implicitly_wait(10)
+
+
+//*[@id="overview"]/main/div[1]/div[1]/div/div

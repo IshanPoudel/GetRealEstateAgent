@@ -79,9 +79,10 @@ def get_all_links():
 
                 print("Up to Date")
                 print(house + "already in the table")
-                quit()
+
 
         mycursor.execute("DESCRIBE house_link")
+        #use a different sql query
 
         for x in mycursor:
             print(x)

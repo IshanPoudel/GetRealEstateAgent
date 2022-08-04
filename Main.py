@@ -4,5 +4,6 @@ from corelate_agent_with_address import corelate
 
 
 get_all_links()
+print("Get all values")
 get_real_estate_table_for_each_value()
 corelate()
