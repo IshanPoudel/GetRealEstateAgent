@@ -16,7 +16,7 @@ Address of the real estate agency
 
 Texas real_estate id number of the agent
 
-The agent's business address
+The agency's public business adress as listed in the Texas Real Estate Comission Website (www.trec.texas.gov).
 
 The agency's business email.
 
